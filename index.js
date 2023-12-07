@@ -27,6 +27,30 @@ const client = new MongoClient(uri, {
 
 async function run() {
     try {
+        //================START==================//;
+        // Get the database and collection on which to run the operation
+        const teacherCollection = client.db("banirayPrimarySchool").collection("teachers");
+        const classesCollection = client.db("banirayPrimarySchool").collection("classes");
+
+        // TEACHER RELATED CODE;
+        app.get('/teachers', async (req, res) => {
+            const result = await teacherCollection.find().toArray();
+            res.send(result);
+        })
+
+
+
+        // CLASS RELATED CODE;
+        app.get('/classes', async (req, res) => {
+            const result = await classesCollection.find().toArray();
+            res.send(result);
+        })
+
+
+
+
+
+        //=================END=================//;
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // Send a ping to confirm a successful connection
